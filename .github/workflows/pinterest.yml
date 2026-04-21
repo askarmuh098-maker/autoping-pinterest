@@ -1,0 +1,36 @@
+name: Pinterest Auto Pin Daily
+
+on:
+  schedule:
+    - cron: '0 2 * * *' # Jalan otomatis setiap jam 10:00 WITA
+  workflow_dispatch: # Tombol manual
+
+jobs:
+  run-pin:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install Requirements
+        run: pip install requests beautifulsoup4
+
+      - name: Execute Auto Pin
+        env:
+          PINTEREST_TOKEN: ${{ secrets.PINTEREST_TOKEN }}
+        run: python autopins.py
+
+      - name: Save Changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add pins.txt
+          git commit -m "Rotate Pin List [skip ci]" || exit 0
+          git push
