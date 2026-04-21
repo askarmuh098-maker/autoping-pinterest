@@ -40,7 +40,7 @@ def create_pin(token, board_id, image_url, title, link):
     return response.json()
 
 def main():
-    token = os.environ.get('pina_AMASRXAXAC2CWAQAGBAKQDE3FOQK3HIBQBIQD275WNP625XRZ456HX5W2RBJYR7BI5ZKYJRZ4VB5TE4AXQEMTX5T4Z2O3UIA')
+    token = os.environ.get('AMASRXAXAC2CWAQAGBAKQDE3FOQK3HIBQBIQD275WNP625XRZ456HX5W2RBJYR7BI5ZKYJRZ4VB5TE4AXQEMTX5T4Z2O3UIA')
     board_id = "912049362503607035" # Ganti dengan Board ID Bapak
     
     if not os.path.exists('pins.txt'):
